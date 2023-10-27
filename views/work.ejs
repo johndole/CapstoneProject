@@ -1,0 +1,27 @@
+<%- include ("partials/header.ejs") %>
+
+<div class="box" id="heading">
+  <h1>
+    <% const currentDate = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = currentDate.toLocaleDateString(undefined, options);
+    %>
+    <%= formattedDate %>
+  </h1>
+</div>
+
+<div class="box" id="itemContainer">
+  <% toDoList.forEach((item, index) => { %>
+    <div class="item">
+      <input type="checkbox">
+      <p><%= item %></p>
+    </div>
+  <% }); %>
+  
+  <form class="item" id="add-item-form" action="/" method="post">
+    <input type="text" name="newItem" placeholder="New Item" autocomplete="off" />
+    <button type="submit">+</button>
+  </form>
+</div>
+
+<%- include("partials/footer.ejs") %>

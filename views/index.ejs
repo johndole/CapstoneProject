@@ -1,0 +1,45 @@
+<%- include("partials/header.ejs") %>
+
+
+<div class="greeting">
+  <% var hour = new Date().getHours(); %>
+  <% var greeting = (hour < 12) ? "Morning": (hour < 18) ? "Afternoon" : "Evening"; %>
+  <h2>Good <%= greeting %>, John Doe<span style="color: blue;">.</span></h2>
+</div>
+
+<div class="quote-container">
+  <p class="quote"><%= dailyQuote %></p>
+</div>
+
+
+<div class="date-box" id="heading">
+  <h2>
+    <% const currentDate = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = currentDate.toLocaleDateString(undefined, options);
+    %>
+    <%= formattedDate %>
+  </h2>
+</div>
+
+
+
+<div class="box" id="itemContainer">
+  <% toDoList.forEach((item, index) => { %>
+    <div class="item">
+      <input type="checkbox">
+      <p><%= item %></p>
+      <form action="/delete/<%= index %>" method="get" style="display: inline;">
+        <button type="submit" class="delete-button">x</button>
+      </form>
+    </div>
+  <% }); %>
+
+  <form class="item" id="add-item-form" action="/" method="post">
+    <input type="text" name="newItem" placeholder="Add Task" autocomplete="off" />
+    <button type="submit">+</button>
+  </form>
+</div>
+
+
+<%- include("partials/footer.ejs") %>
